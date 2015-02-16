@@ -1,0 +1,135 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_below="@+id/textView1"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/forward_button"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="" />
+
+    <Button
+        android:id="@+id/reverse_button"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignLeft="@+id/forward_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/forward_button"
+        android:text="" />
+
+    <Button
+        android:id="@+id/right_button"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/left_button"
+        android:text="" />
+
+    <Button
+        android:id="@+id/left_button"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="" />
+
+    <SeekBar
+        android:id="@+id/speed_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:indeterminate="false"
+        android:max="155" />
+
+    <TextView
+        android:id="@+id/minSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Minimum = 100"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/maxSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/minSpeed"
+        android:text="Maximum = 255"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/currentSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/maxSpeed"
+        android:text="Current Speed = "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <ImageView
+        android:id="@+id/upArrowView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/forward_button"
+        android:layout_alignEnd="@+id/forward_button"
+        android:layout_alignLeft="@+id/forward_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/forward_button"
+        android:layout_alignStart="@+id/forward_button"
+        android:background="@drawable/ic_up_arrow" />
+
+    <ImageView
+        android:id="@+id/downArrowView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/reverse_button"
+        android:layout_alignEnd="@+id/reverse_button"
+        android:layout_alignLeft="@+id/reverse_button"
+        android:layout_alignRight="@+id/reverse_button"
+        android:layout_alignStart="@+id/reverse_button"
+        android:layout_alignTop="@+id/reverse_button"
+        android:background="@drawable/ic_down_arrow" />
+
+    <ImageView
+        android:id="@+id/rightArrowView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/right_button"
+        android:layout_alignEnd="@+id/right_button"
+        android:layout_alignLeft="@+id/right_button"
+        android:layout_alignRight="@+id/right_button"
+        android:layout_alignStart="@+id/right_button"
+        android:layout_alignTop="@+id/right_button"
+        android:background="@drawable/ic_right_arrow" />
+
+    <ImageView
+        android:id="@+id/leftArrowView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/left_button"
+        android:layout_alignEnd="@+id/left_button"
+        android:layout_alignLeft="@+id/left_button"
+        android:layout_alignRight="@+id/left_button"
+        android:layout_alignStart="@+id/left_button"
+        android:layout_alignTop="@+id/left_button"
+        android:background="@drawable/ic_left_arrow" />
+
+</RelativeLayout>

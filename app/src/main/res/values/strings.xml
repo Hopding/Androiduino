@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Robot Controller</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_speed">Set Speed</string>
+    <string name="available_devices">AVAILABLE DEVICES: </string>
+    <string name="title_activity_bt_dev_select">btDevSelect</string>
+    <string name="title_activity_controller">Controller</string>
+
+</resources>
