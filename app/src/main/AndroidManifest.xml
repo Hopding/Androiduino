@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ajd2.com.robotcontroller">
+    package="com.hopding.androiduino">
 
     <uses-sdk android:minSdkVersion="11" />
 
@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".BtDevSelect"
+            android:name="com.hopding.androiduino.BtDevSelect"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Controller"
+            android:name="com.hopding.androiduino.Controller"
             android:label="@string/title_activity_controller"
             android:screenOrientation="portrait">
         </activity>

@@ -9,6 +9,7 @@
 
     <Button
         android:id="@+id/forward_button"
+        android:background="@android:color/transparent"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
@@ -17,6 +18,7 @@
 
     <Button
         android:id="@+id/reverse_button"
+        android:background="@android:color/transparent"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignLeft="@+id/forward_button"
@@ -26,6 +28,7 @@
 
     <Button
         android:id="@+id/right_button"
+        android:background="@android:color/transparent"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignParentEnd="true"
@@ -35,24 +38,13 @@
 
     <Button
         android:id="@+id/left_button"
+        android:background="@android:color/transparent"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:text="" />
-
-    <SeekBar
-        android:id="@+id/speed_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:indeterminate="false"
-        android:max="155" />
 
     <TextView
         android:id="@+id/minSpeed"
@@ -131,5 +123,17 @@
         android:layout_alignStart="@+id/left_button"
         android:layout_alignTop="@+id/left_button"
         android:background="@drawable/ic_left_arrow" />
+
+    <SeekBar
+        android:id="@+id/speed_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:indeterminate="false"
+        android:max="155" />
 
 </RelativeLayout>

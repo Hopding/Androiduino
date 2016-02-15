@@ -1,12 +1,8 @@
-package ajd2.com.robotcontroller;
+package com.hopding.androiduino;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,28 +12,24 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import java.util.Set;
-
-//Controller class receives the MAC address for the selected device from BtDevSelect activity
-//and uses it as a parameter for a new instance of BluetoothConnect. The various method available
-//in BluetoothConnect are then called from four buttons and a slider. The slider can be shown or
-//hidden by pressing a button on the action bar.
+/**
+ * Controller class receives the MAC address for the selected device from BtDevSelect activity
+ * and connects it with a Robot instance using BtConnect. The Buttons on the GUI send bytes with
+ * Robot when pressed by the user. The slider adjusts the Robots speed - it can be shown or hidden
+ * by pressing a button on the action bar.
+ */
 public class Controller extends ActionBarActivity {
-    private static final int REQUEST_ENABLE_BT = 1;
-    BluetoothAdapter btAdapter;
-    BluetoothDevice robot;
-    SeekBar speedBar;
-    int speed = 256;
-    TextView textView;
+    private BluetoothAdapter btAdapter;
+    private Robot robot;
+    private SeekBar speedBar;
+    private int speed = 256;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+////////////////////////////////////////Set up GUI//////////////////////////////////////////////////
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controller);
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(BtDevSelect.EXTRA_MESSAGE);
-        btAdapter = BluetoothAdapter.getDefaultAdapter();
-        final BluetoothConnect btConnect = new BluetoothConnect(robot = btAdapter.getRemoteDevice(message), btAdapter);
         textView = (TextView) findViewById(R.id.currentSpeed);
         speedBar = (SeekBar) findViewById(R.id.speed_bar);
         speedBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -54,25 +46,19 @@ public class Controller extends ActionBarActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
-
-                btConnect.changeSpeed(speed + 6);
-
+                robot.changeSpeed(speed + 6);
             }
         });
         speedBar.setVisibility(View.GONE);
 
-        // Getting the Bluetooth adapter
-
-        btConnect.run();
         final Button forwardButton = (Button) findViewById(R.id.forward_button);
         forwardButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btConnect.forward();
+                    robot.forward();
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btConnect.stopMoving();
+                    robot.stopMoving();
                 }
                 return false;
             }
@@ -83,9 +69,9 @@ public class Controller extends ActionBarActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btConnect.reverse();
+                    robot.reverse();
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btConnect.stopMoving();
+                    robot.stopMoving();
                 }
                 return false;
             }
@@ -96,9 +82,9 @@ public class Controller extends ActionBarActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btConnect.right();
+                    robot.right();
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btConnect.stopMoving();
+                    robot.stopMoving();
                 }
                 return false;
             }
@@ -109,13 +95,21 @@ public class Controller extends ActionBarActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btConnect.left();
+                    robot.left();
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btConnect.stopMoving();
+                    robot.stopMoving();
                 }
                 return false;
             }
         });
+////////////////////////////////////////End of GUI Setup////////////////////////////////////////////
+
+
+        //Use BtConnect to connect with the bluetooth device chosen by user in BtDevSelect Activity,
+        //and connect it with robot.
+        String message = getIntent().getStringExtra(BtDevSelect.EXTRA_MESSAGE);
+        btAdapter = BluetoothAdapter.getDefaultAdapter();
+        new BtConnect(btAdapter.getRemoteDevice(message), btAdapter, robot);
     }
 
     @Override

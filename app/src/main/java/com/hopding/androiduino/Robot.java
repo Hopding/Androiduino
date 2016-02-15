@@ -1,4 +1,4 @@
-package ajd2.com.robotcontroller;
+package com.hopding.androiduino;
 
 import android.bluetooth.BluetoothSocket;
 
@@ -6,19 +6,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-//Robot class sends bytes to the Arduino. 1-5 are used to control direction and
-//stopping. 6-201 are used to control speed.
-public class Robot extends Thread {
-    final BluetoothSocket mmSocket;
-    private final InputStream mmInStream;
-    private final OutputStream output;
+/**
+ * Robot class sends bytes to the Arduino. 1-5 are used to control direction and
+ * stopping. 6-201 are used to control speed.
+ */
+public class Robot {
+    private BluetoothSocket btSocket;
+    private InputStream btInStream;
+    private OutputStream btOutStream;
 
-    public Robot(BluetoothSocket socket) {
-        mmSocket = socket;
+    public Robot() {
+    }
+
+    public void setSocket(BluetoothSocket socket) {
+        btSocket = socket;
         InputStream tmpIn = null;
         OutputStream tmpOut = null;
 
-        // Get the input and output streams, using temp objects because
+        // Get the input and btOutStream streams, using temp objects because
         // member streams are final
         try {
             tmpIn = socket.getInputStream();
@@ -26,29 +31,27 @@ public class Robot extends Thread {
         } catch (IOException e) {
         }
 
-        mmInStream = tmpIn;
-        output = tmpOut;
+        btInStream = tmpIn;
+        btOutStream = tmpOut;
     }
 
-    /* Call this from the main activity to send data to the remote device */
     public void write(byte[] bytes) {
         try {
-            output.write(bytes);
+            btOutStream.write(bytes);
         } catch (IOException e) {
         }
     }
 
-    /* Call this from the main activity to shutdown the connection */
     public void cancel() {
         try {
-            mmSocket.close();
+            btSocket.close();
         } catch (IOException e) {
         }
     }
 
     public void forward() {
         try {
-            output.write((byte) 1);
+            btOutStream.write((byte) 1);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,7 +59,7 @@ public class Robot extends Thread {
 
     public void reverse() {
         try {
-            output.write((byte) 2);
+            btOutStream.write((byte) 2);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,7 +67,7 @@ public class Robot extends Thread {
 
     public void right() {
         try {
-            output.write((byte) 3);
+            btOutStream.write((byte) 3);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -72,7 +75,7 @@ public class Robot extends Thread {
 
     public void left() {
         try {
-            output.write((byte) 4);
+            btOutStream.write((byte) 4);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,7 +83,7 @@ public class Robot extends Thread {
 
     public void stopMoving() {
         try {
-            output.write((byte) 5);
+            btOutStream.write((byte) 5);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -88,7 +91,7 @@ public class Robot extends Thread {
 
     public void changeSpeed(int speed) {
         try {
-            output.write((byte) speed);
+            btOutStream.write((byte) speed);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,5 @@
-package ajd2.com.robotcontroller;
+package com.hopding.androiduino;
 
-import android.app.ActionBar;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
@@ -16,47 +15,44 @@ import android.widget.TextView;
 
 import java.util.Set;
 
-import ajd2.com.robotcontroller.Controller;
-
-
-//BtDevSelect Activity lists all of the devices that have been paired to your device
-//Then displays a series of buttons with each devices name and MAC
-//When a button is pressed an intent containing the MAC address listed on that button
-//is send to the Controller Activity
+/**
+ * BtDevSelect Activity lists all of the devices that have been paired to your device,
+ * then displays a series of buttons with each device's name and MAC address.
+ * When a button is pressed, an intent containing the MAC address listed on that button
+ * is send to the Controller Activity.
+ */
 public class BtDevSelect extends ActionBarActivity {
-    public final static String EXTRA_MESSAGE = "com.ajd1.btdevscanselect";
-    BluetoothAdapter btAdapter;
-    TextView availableDevices;
-    LinearLayout layout;
-    BluetoothDevice[] btDevices;
-    Set<BluetoothDevice> devices;
-    String message;
-    View.OnClickListener clickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(v.getContext(), Controller.class);
-            message = btDevices[v.getId()].toString();
-            intent.putExtra(EXTRA_MESSAGE, message);
-            startActivity(intent);
-        }
-    };
+    public final static String EXTRA_MESSAGE = "com.hopding.androiduino.BtDevSelect";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Set up GUI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bt_dev_select);
-        layout = (LinearLayout) findViewById(R.id.availableDeviceButtons);
-        availableDevices = (TextView) findViewById(R.id.availableDevices);
-        btAdapter = BluetoothAdapter.getDefaultAdapter();
+        LinearLayout layout = (LinearLayout) findViewById(R.id.availableDeviceButtons);
 
-        devices = btAdapter.getBondedDevices();
-        btDevices = new BluetoothDevice[devices.size()];
+        //Store all paired devices in an array
+        BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+        Set<BluetoothDevice> devices = btAdapter.getBondedDevices();
+        final BluetoothDevice[] btDevices = new BluetoothDevice[devices.size()];
         devices.toArray(btDevices);
+
+        //Display a list of Buttons; one for each device
         for (int i = 0; i < devices.size(); i++) {
             Button button = new Button(this);
             button.setId(i);
             button.setText("Name: " + btDevices[i].getName() + '\n' + "MAC: " + btDevices[i]);
-            button.setOnClickListener(clickListener);
+            //When user taps a button, start Controller.class and send an intent containing
+            //the MAC address of selected device
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), Controller.class);
+                    String message = btDevices[v.getId()].toString();
+                    intent.putExtra(EXTRA_MESSAGE, message);
+                    startActivity(intent);
+                }
+            });
             button.setLayoutParams(new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT

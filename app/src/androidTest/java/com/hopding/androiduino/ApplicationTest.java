@@ -1,4 +1,4 @@
-package ajd2.com.robotcontroller;
+package com.hopding.androiduino;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
