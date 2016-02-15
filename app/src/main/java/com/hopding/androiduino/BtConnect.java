@@ -34,7 +34,6 @@ public class BtConnect extends Thread {
         } catch (IOException e) {
         }
         btSocket = tmp;
-
         this.robot = robot;
     }
 
