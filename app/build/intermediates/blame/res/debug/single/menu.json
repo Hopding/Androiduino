@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Users\\Andrew\\git\\androiduino\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_controller.xml",
+        "source": "C:\\Users\\Andrew\\git\\androiduino\\app\\src\\main\\res\\menu\\menu_controller.xml"
+    },
+    {
+        "merged": "C:\\Users\\Andrew\\git\\androiduino\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_bt_dev_select.xml",
+        "source": "C:\\Users\\Andrew\\git\\androiduino\\app\\src\\main\\res\\menu\\menu_bt_dev_select.xml"
+    },
+    {
+        "merged": "C:\\Users\\Andrew\\git\\androiduino\\app\\build\\intermediates\\res\\merged\\debug\\menu\\controller_activity_actions.xml",
+        "source": "C:\\Users\\Andrew\\git\\androiduino\\app\\src\\main\\res\\menu\\controller_activity_actions.xml"
+    }
+]
